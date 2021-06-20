@@ -11,7 +11,7 @@ public class MessageBodyEnricher implements Enricher<Map<String, String>, Accoun
 
 	@Override
 	public void enrich(final Map<String, String> body, final Account source) {
-		// Здесь может лежать и другая дополнительная информация. Зависит от внешней системы
+		// Здесь может лежать и другая дополнительная информация.
 		body.put("email", source.getEmailAddress());
 	}
 }

@@ -8,8 +8,8 @@ import java.util.UUID;
 public class Message {
 
 	/**
-	 * UUID Message именно которого пришёл
+	 * UUID Message
 	 */
-	private final UUID uuid;
+	protected final UUID uuid;
 
 }

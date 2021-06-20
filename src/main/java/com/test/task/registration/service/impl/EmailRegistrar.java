@@ -33,13 +33,11 @@ public class EmailRegistrar implements Registrar {
 	@Qualifier("messageEnricher")
 	private final Enricher<Map<String, String>, Account> enricherMessage;
 
-	private final SendMailer mailer;
-
 	private final AccountRepositoryAdapter accountRepository;
 
 	private final ResponseResolver resolver;
 
-	private final MessagingService<Map<String, String>, Message> messagingService;
+	private final MessagingService<Map<String, String>, MessageMap> messagingService;
 
 	public ResponseEntity<String> register(final RegistrationRequest request) {
 		try {
@@ -51,7 +49,7 @@ public class EmailRegistrar implements Registrar {
 
 			Map<String, String> messageBody = new HashMap<>();
 			enricherMessage.enrich(messageBody, account);
-			MessageMap message = (MessageMap) messagingService.doRequest(messageBody);
+			MessageMap message = messagingService.doRequest(messageBody);
 
 			resolver.resolve(message, account);
 

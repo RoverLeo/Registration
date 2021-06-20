@@ -1,5 +1,6 @@
 package com.test.task.registration.service.impl;
 
+import com.test.task.registration.entity.EmailLetter;
 import com.test.task.registration.exception.TimeoutException;
 import com.test.task.registration.service.SendMailer;
 import lombok.SneakyThrows;
@@ -14,12 +15,12 @@ import java.util.concurrent.TimeUnit;
 public class SendMailerStub implements SendMailer {
 
 	@Override
-	public void sendMail(String toAddress, String messageBody) {
+	public void sendMail(EmailLetter letter) {
 		if (shouldThrowTimeout()) {
 			sleep();
 
-			log.error("Timeout sending mail to {}, body {}.", toAddress, messageBody);
-			throw new TimeoutException("Timeout!");
+			log.error("Timeout при отправки по адрессу {}, с сообщением {}.", letter.getToAddress(), letter.getMessageBody());
+			throw new TimeoutException("Timeout при отправке письма");
 		}
 
 		if (shouldSleep()) {
@@ -27,7 +28,7 @@ public class SendMailerStub implements SendMailer {
 		}
 
 		// ok.
-		log.info("Message sent to {}, body {}.", toAddress, messageBody);
+		log.info("Message sent to {}, body {}.", letter.getToAddress(), letter.getMessageBody());
 	}
 
 	@SneakyThrows

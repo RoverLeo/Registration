@@ -1,6 +1,5 @@
 package com.test.task.registration.service.impl;
 
-import com.test.task.registration.entity.Message;
 import com.test.task.registration.entity.MessageMap;
 import com.test.task.registration.exception.TimeoutException;
 import com.test.task.registration.service.MessagingService;

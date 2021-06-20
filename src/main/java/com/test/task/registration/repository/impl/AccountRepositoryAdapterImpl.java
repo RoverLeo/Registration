@@ -1,6 +1,5 @@
 package com.test.task.registration.repository.impl;
 
-import com.test.task.registration.constants.ExceptionTextConstants;
 import com.test.task.registration.entity.Account;
 import com.test.task.registration.entity.Status;
 import com.test.task.registration.exception.EmailDuplicateException;
@@ -14,6 +13,8 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.test.task.registration.constants.ExceptionTextConstants.EMAIL_DUPLICATE_TEXT;
+import static com.test.task.registration.constants.ExceptionTextConstants.LOGIN_DUPLICATE_TEXT;
 import static java.lang.Boolean.TRUE;
 
 @Slf4j
@@ -49,13 +50,13 @@ public class AccountRepositoryAdapterImpl implements AccountRepositoryAdapter {
 		Optional<Account> emailDuplicate = accountRepository.findByEmailAddress(account.getEmailAddress());
 		if (emailDuplicate.isPresent()) {
 			log.error("Аккаунт с email {} уже есть", emailDuplicate.get());
-			throw new EmailDuplicateException(ExceptionTextConstants.EMAIL_DUPLICATE_TEXT);
+			throw new EmailDuplicateException(EMAIL_DUPLICATE_TEXT);
 		}
 
 		Optional<Account> loginDuplicate = accountRepository.findByLogin(account.getLogin());
 		if (loginDuplicate.isPresent()) {
 			log.error("Аккаунт с login {} уже есть", loginDuplicate.get());
-			throw new LoginDuplicateException(ExceptionTextConstants.LOGIN_DUPLICATE_TEXT);
+			throw new LoginDuplicateException(LOGIN_DUPLICATE_TEXT);
 		}
 
 		return TRUE;

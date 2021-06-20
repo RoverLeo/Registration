@@ -4,14 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.util.UUID;
 
-import static javax.persistence.EnumType.*;
-import static org.hibernate.annotations.CascadeType.DELETE;
+import static javax.persistence.EnumType.STRING;
 
 /**
  * Гланвая сущность. Цель сервиса - зарегестрировать пользователя = положить в базу
@@ -29,8 +26,6 @@ public class Account {
 	/* Вводим UUID и будет использовать его как ключ. Long быстро закончиться, а у нас банк с миллионами людей, а данный
 	сервис может испольховаться для нескольких сервисов компании */
 	@Id
-	@Cascade(DELETE)
-	// todo тут вот связь
 	private UUID uuid;
 
 	private String login;
