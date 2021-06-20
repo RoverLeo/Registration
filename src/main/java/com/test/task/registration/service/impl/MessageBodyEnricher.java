@@ -2,11 +2,11 @@ package com.test.task.registration.service.impl;
 
 import com.test.task.registration.entity.Account;
 import com.test.task.registration.service.Enricher;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@Service("messageEnricher")
+@Component("messageEnricher")
 public class MessageBodyEnricher implements Enricher<Map<String, String>, Account> {
 
 	@Override

@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import static com.test.task.registration.entity.Status.INITIAL;
 
-@Service("accountEnricher")
+@Component("accountEnricher")
 public class AccountEnricher implements Enricher<Account, RegistrationRequest> {
 
 	@Override
