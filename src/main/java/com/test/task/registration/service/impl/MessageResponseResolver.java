@@ -9,11 +9,13 @@ import com.test.task.registration.service.SendMailer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static com.test.task.registration.entity.Status.DELETED;
 import static com.test.task.registration.entity.Status.REQUEST_SENT_TO_EMAIL;
 
 @Slf4j
+@Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MessageResponseResolver implements ResponseResolver {
 
