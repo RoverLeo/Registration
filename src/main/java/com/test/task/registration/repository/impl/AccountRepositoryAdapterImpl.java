@@ -40,19 +40,22 @@ public class AccountRepositoryAdapterImpl implements AccountRepositoryAdapter {
 
 	@Override
 	public void deleteById(UUID id) {
+		log.debug("проверяем есть ли аккаунт в базе");
 		if (accountRepository.existsById(id)) {
-			log.debug("удаляем аккаунт из бд");
+			log.debug("аккаунт найден - удаляем его из бд");
 			accountRepository.deleteById(id);
 		}
 	}
 
 	private boolean absentDuplicate(final Account account) {
+		log.error("Ищем account с дубликатом email в бд");
 		Optional<Account> emailDuplicate = accountRepository.findByEmailAddress(account.getEmailAddress());
 		if (emailDuplicate.isPresent()) {
 			log.error("Аккаунт с email {} уже есть", emailDuplicate.get());
 			throw new EmailDuplicateException(EMAIL_DUPLICATE_TEXT);
 		}
 
+		log.error("Ищем account с дубликатом login в бд");
 		Optional<Account> loginDuplicate = accountRepository.findByLogin(account.getLogin());
 		if (loginDuplicate.isPresent()) {
 			log.error("Аккаунт с login {} уже есть", loginDuplicate.get());
@@ -61,5 +64,4 @@ public class AccountRepositoryAdapterImpl implements AccountRepositoryAdapter {
 
 		return TRUE;
 	}
-
 }
